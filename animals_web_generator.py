@@ -12,7 +12,7 @@ def get_details(data):
             animal_info = {
                 "name": animal.get("name", "Unknown"), # trying out get since not all animals have all keys 
                 "diet": animal.get("characteristics", {}).get("diet", "Unknown"), #"appends" empty dict in first check for characteristics, if key not there (wasnt necessary)
-                "location": animal.get("locations", "Unknown"),
+                "location": ", ".join(animal.get("locations", "Unknown")), #join for nicer output and getting rid of the list brackets
                 "type": animal.get("characteristics", {}).get("type", "Unknown"),
             }
             animals.append(animal_info)
@@ -23,7 +23,7 @@ def get_details(data):
 def print_animal_details(details):
     for animal in details:
         for key, value in animal.items():
-            print(f"{key}: {value}")
+            print(f"{key.capitalize()}: {value}")
         print()
         
 
