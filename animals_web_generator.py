@@ -1,3 +1,5 @@
+# programm to add animal data to a html template with the correct place holder
+# the html template shows 13 errors in vscode, maybe you can pass it to someone who is working on those :D 
 import json
 
 def load_data(file_path):
@@ -11,6 +13,7 @@ def load_html(filepath_to_html):
         return html.read()
 
 def write_new_html(html, formatted_details):
+    """ takes read html document and formatted text to replace the placeholder in html with the formatted details """
     final_html = html.replace("__REPLACE_ANIMALS_INFO__", formatted_details) # replacing place holder with formatted information
     output_path = "/home/coder/Zootopia/animals.html" # 
     with open(output_path, "w") as output_file:
@@ -21,6 +24,7 @@ def write_new_html(html, formatted_details):
 
 
 def get_details(data):
+    """ reads data and builds a dict for every animal and puts it in a list 'animals' """
     animals = []
     for animal in data:
         try:
@@ -36,6 +40,7 @@ def get_details(data):
     return animals
 
 def print_animal_details(details):
+    """ print animal data - was part of the task so it will stay """
     for animal in details:
         for key, value in animal.items():
             print(f"{key.capitalize()}: {value}") #capitalized here since the example output was like that
@@ -45,10 +50,14 @@ def format_animal_details(details):
     """Formats data from get_details to blocks for python, lists for html """
     animal_details_string = ""
     for animal in details:
-        animal_details_string += '<li class="cards__item"\n'
+        animal_details_string += '<li class="cards__item">\n'
+        animal_details_string += f'  <div class="card__title">{animal["name"]}</div>\n'
+        animal_details_string += '  <p class="card__text">\n'
         for key, value in animal.items():
-           animal_details_string += f"{key.capitalize()}: {value}<br>\n" # animal details in blocks
-        animal_details_string += "<li>\n" # extra line between animals
+           if key != "name":  # skip name since its already in the title
+                animal_details_string += f'<strong>{key.capitalize()}:</strong> {value}<br/>\n' # add key, value with strong key
+        animal_details_string += '  </p>\n'
+        animal_details_string += '</li>\n' 
     animal_details_string = animal_details_string.rstrip()  # removed last empty line
     return animal_details_string
     #print(f"{animal_details_string}")       # testing only        
