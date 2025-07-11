@@ -33,6 +33,9 @@ def get_details(data):
                 "diet": animal.get("characteristics", {}).get("diet", "Unknown"), #"appends" empty dict in first check for characteristics, if key not there (wasnt necessary)
                 "location": ", ".join(animal.get("locations", ["Unknown"])), #join for nicer output and getting rid of the list brackets
                 "type": animal.get("characteristics", {}).get("type", "Unknown"),
+                "weight": animal.get("characteristics", {}).get("weight", "Unknown"),  # added for bonus
+                "lifespan": animal.get("characteristics", {}).get("lifespan", "Unknown"),  # added for bonus
+                "color": animal.get("characteristics", {}).get("color", "Unknown"),  # added for bonus
             }
             animals.append(animal_info)
         except KeyError:
@@ -52,7 +55,7 @@ def format_animal_details(details):
     for animal in details:
         animal_details_string += '<li class="cards__item">\n'
         animal_details_string += f'  <div class="card__title">{animal["name"]}</div>\n'
-        animal_details_string += '  <p class="card__text">\n'
+        animal_details_string += '<p class="card__text two-columns">\n' # made the class to make it in 2 columns for nice output 
         for key, value in animal.items():
            if key != "name":  # skip name since its already in the title
                 animal_details_string += f'<strong>{key.capitalize()}:</strong> {value}<br/>\n' # add key, value with strong key
