@@ -42,12 +42,14 @@ def print_animal_details(details):
         print()
 
 def format_animal_details(details):
+    """Formats data from get_details to blocks for python, lists for html """
     animal_details_string = ""
     for animal in details:
+        animal_details_string += '<li class="cards__item"\n'
         for key, value in animal.items():
-           animal_details_string += f"{key.capitalize()}: {value}\n" # animal details in blocks
-        animal_details_string += "\n" # extra line between animals
-    animal_details_string = animal_details_string.rstrip()  # removed last empty line 
+           animal_details_string += f"{key.capitalize()}: {value}<br>\n" # animal details in blocks
+        animal_details_string += "<li>\n" # extra line between animals
+    animal_details_string = animal_details_string.rstrip()  # removed last empty line
     return animal_details_string
     #print(f"{animal_details_string}")       # testing only        
 
