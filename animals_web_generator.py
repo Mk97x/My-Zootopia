@@ -140,7 +140,11 @@ def filter_animals_by_skin_type(details):
     
     # check if input is a number
     try:
-        choice_num = int(user_input)
+        choice_num = (user_input)
+        if choice_num == "q":
+            print_menu()
+            return
+        choice_num = int(choice_num)
         if 1 <= choice_num <= len(skin_types):
             selected = skin_types[choice_num - 1]  # convert number to actual skin type name
         else:
