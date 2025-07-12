@@ -66,9 +66,10 @@ def format_animal_details(details):
     return animal_details_string.rstrip()       
 
 def get_user_input(formatted_details, data, details, html):
-    print_menu()
+    """Gets user input and performs the right functition as reaction"""
+    
     while True:
-        
+        print_menu()
         choice = input("What do you wanna do? ")
         if choice == "q":
             return
@@ -110,26 +111,8 @@ def get_available_skin_types(details):
             skin_types.add(skin_type)
     return sorted(skin_types)
 
-def filter_animals_by_skin_type(data, formatted_data, skintype="Unknown"):
-    found_animals = []
-    skintype = get_skin_type_to_search_input()
-    for animal in details:
-        for key, values in aninimal.items():
-            try:
-                animal_info = {
-                    "name": animal.get("name", "Unknown"), # trying out get since not all animals have all keys, giving back "Unknown" if key is not found
-                    "diet": animal.get("characteristics", {}).get("diet", "Unknown"), #"appends" empty dict in first check for characteristics, if key not there (wasnt necessary)
-                    "location": ", ".join(animal.get("locations", ["Unknown"])), #join for nicer output and getting rid of the list brackets
-                    "type": animal.get("characteristics", {}).get("type", "Unknown"),
-                    "weight": animal.get("characteristics", {}).get("weight", "Unknown"),  # added for bonus
-                    "lifespan": animal.get("characteristics", {}).get("lifespan", "Unknown"),  # added for bonus
-                    "skin_type": animal.get("characteristics", {}).get("skin_type", "Unknown"),  # added for bonus
-                }
-                animals.append(animal_info)
-            except KeyError:
-                print("Test")
-
 def filter_animals_by_skin_type(details):
+    """creates the string """
     skin_types = get_available_skin_types(details)
     
     print("\nAvailable skin types:")
@@ -159,7 +142,7 @@ def filter_animals_by_skin_type(details):
     if not filtered_animals:
         print(f" No animals found with skin type '{selected}'.")
     else:
-        print(f"✅ Found {len(filtered_animals)} animals with skin type '{selected}':")
+        print(f"Found {len(filtered_animals)} animals with skin type '{selected}':")
         for animal in filtered_animals:
             print(f"  - {animal['name']}")
 
@@ -176,7 +159,7 @@ def main():
         html = load_html(filepath_to_html)
         
         print(f"Loaded {len(details)} animals from database.")
-        
+
         get_user_input(formatted_details, data, details, html)
 
     except FileNotFoundError as e:
