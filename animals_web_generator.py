@@ -15,7 +15,7 @@ def load_html(filepath_to_html):
 def write_new_html(html, formatted_details):
     """ takes read html document and formatted text to replace the placeholder in html with the formatted details """
     final_html = html.replace("__REPLACE_ANIMALS_INFO__", formatted_details) # replacing place holder with formatted information
-    output_path = "/home/coder/Zootopia/animals.html" # 
+    output_path = "animals.html" # 
     with open(output_path, "w") as output_file:
         output_file.write(final_html)
     print(f"HTML file created: {output_path}")
@@ -166,8 +166,8 @@ def filter_animals_by_skin_type(details):
     return filtered_animals
 
 def main():
-    file_path = "/home/coder/Zootopia/animals_data.json"
-    filepath_to_html = "/home/coder/Zootopia/animals_template.html"
+    file_path = "animals_data.json"
+    filepath_to_html = "animals_template.html"
 
     try:
         data = load_data(file_path)
@@ -183,5 +183,7 @@ def main():
         print(f"Error: File not found - {e}")
     except json.JSONDecodeError as e:
         print(f"Error: Invalid JSON format - {e}")
-    
-main()
+
+
+if __name__ == "__main__":
+    main()
