@@ -55,10 +55,19 @@
           letter-spacing: 2px;
           text-transform: uppercase;
         }
-        .card__text.two-columns { /* added this for nice output within the cards in 2 columns */
-           columns: 2;
-           column-gap: 20px;
+        .card__details {
+          columns: 2;
+          column-gap: 20px;
+          list-style: none;
+          padding: 0;
+          margin: 0;
 }
+
+        .card__detail-item {
+          break-inside: avoid;
+            margin-bottom: 8px;
+}
+
         .card__text {
           flex: 1 1 auto;
           font-size: 0.95rem;
